@@ -1,0 +1,15 @@
+{
+  "name": "jssuanfa",
+  "version": "1.0.0",
+  "description": "jsSuanfa",
+  "main": "demo.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "axing",
+  "license": "ISC",
+  "dependencies": {
+    "react-router-dom": "^5.3.0"
+  }
+}

@@ -1,0 +1,32 @@
+/* 2021/10/8 20：31 自己写的滑动窗口，注意两个if块的顺序 */
+const numberOfSubarrays = (nums,k) => {
+    let left = 0, right = 0, len = nums.length, winMeetOdd = 0, ret = 0, leftTemp = 0;
+
+    while(right < len){
+        if(nums[right] % 2 !== 0) winMeetOdd++;
+
+        if(winMeetOdd > k){
+            while(winMeetOdd > k){
+                if(nums[left] % 2 !== 0) winMeetOdd--;
+                left++;
+            }
+        }
+
+        if(winMeetOdd === k){
+            leftTemp = left;
+            while(winMeetOdd === k){
+                ret++;
+                if(nums[left] % 2 !== 0) winMeetOdd--;
+                left++;
+            }
+            left = leftTemp;
+            winMeetOdd = k;
+        }
+
+        right++;
+    }
+
+    return ret;
+};
+
+console.log(numberOfSubarrays([2,4,6],1));
