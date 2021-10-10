@@ -1,3 +1,11 @@
+/***
+ * @creater:ACBash
+ * @create_time:21-10-10 17:39:36
+ * @last_modify:ACBash
+ * @modify_time:21-10-10 17:39:36
+ * @line_count:183
+ **/
+
 /* console.log(subarraysWithKDistinct([2,1,1,1,2],1)); */
 /* 超时了，可惜 */
 
@@ -122,3 +130,70 @@ const subarraysWithKDistinct = (nums,k) => {
 
     return ret;
 };
+
+/* 和LC-904:水果成篮 很像，不同的是，篮子的个数是K，
+ * 要求的不是窗口的最大长度，而是满足条件的窗口个数 
+ * 种类不会减少，属于是上升序列，可以满足条件后倒推
+ * 这种做法思路简单，但是时间复杂度是O(n^2)
+ * LC上跑了4808ms，很险
+ */
+const subarraysWithKDistinct = (nums,k) => {
+    let ans = 0;
+    let pre = 0;
+    let boxs = new Set();
+
+    for(let i=0; i<nums.length; i++){
+        boxs.add(nums[i]);
+        if(boxs.size >= k){
+            boxs.clear();
+            pre = 0;
+            let j = i;
+            while(boxs.size < k+1){
+                if(boxs.size === k){
+                    pre++;
+                } 
+                boxs.add(nums[j]);
+                j--;
+            }
+            boxs.delete(nums[j+1]);
+        }
+
+        ans += pre;
+    }
+
+    return ans;
+};
+
+console.log(subarraysWithKDistinct([1,2,1,2,3],2));
+
+/* 前缀和，<=k的情况 减去 <=k-1的情况，底层用滑动窗口 */
+const atMostK = (nums,k) => {
+    let hash = {};
+    let ans = 0, left = 0;
+
+    for(let right=0; right<nums.length; right++){
+        if(!hash[nums[right]]){
+            hash[nums[right]] = 0;
+            k--;
+        }
+        hash[nums[right]]++;
+
+        while(k < 0){
+            hash[nums[left]]--;
+            if(hash[nums[left]] === 0){
+                k++;
+            }
+            left++;
+        } //窗口元素种类溢出
+
+        ans += right-left+1;
+    }
+
+    return ans;
+};
+
+const subarraysWithKDistinct = (nums,k) => {
+    return atMostK(nums,k) - atMostK(nums,k-1);
+};
+
+console.log(subarraysWithKDistinct([1,2,1,3,4],3)); 

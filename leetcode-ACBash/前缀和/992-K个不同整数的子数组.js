@@ -1,9 +1,9 @@
 /***
  * @creater:ACBash
- * @create_time:21-10-10 17:39:14
+ * @create_time:21-10-10 17:38:51
  * @last_modify:ACBash
- * @modify_time:21-10-10 17:40:26
- * @line_count:191
+ * @modify_time:21-10-10 17:38:51
+ * @line_count:183
  **/
 
 /* console.log(subarraysWithKDistinct([2,1,1,1,2],1)); */
