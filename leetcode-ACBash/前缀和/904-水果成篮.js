@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-10-10 15:49:46
  * @last_modify:ACBash
- * @modify_time:21-10-10 15:49:46
- * @line_count:58
+ * @modify_time:21-10-10 15:50:2
+ * @line_count:66
  **/
 
 /* console.log(totalFruit([3,3,3,1,2,1,1,2,3,3,4])); */
