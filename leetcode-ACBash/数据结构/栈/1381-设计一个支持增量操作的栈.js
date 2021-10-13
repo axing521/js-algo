@@ -31,21 +31,35 @@ customStack0.pop();
 customStack0.pop();
 customStack0.pop(); */
 
-class CustomStack{
+/***
+ * @creater:ACBash
+ * @create_time:21-10-13 19:46:41
+ * @last_modify:ACBash
+ * @modify_time:21-10-13 20:12:48
+ * @line_count:57
+ **/
+
+ class CustomStack{
     constructor(maxSize){
-        this.items=[];
-        this.length=maxSize;
+        this.items = [];
+        this.maxSize = maxSize;
     }
 
     push(x){
-        if(this.items.length!==this.length){
+        if(this.items.length < this.maxSize){
             this.items.push(x);
         }
     }
     pop(){
-        return this.items.length ? this.items.pop() : -1;   
+        if(this.items.length){
+            return this.items.pop();
+        }
+        return -1;
     }
-    increment(k,val){
-        this.items = this.items.map((item,index) => index<k ? item+val : item);
+    increment(k, val){
+        const most = Math.min(k,this.items.length)
+        for(let i=0; i<most; i++){
+            this.items[i] += val;
+        }
     }
 }
