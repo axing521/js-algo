@@ -19,6 +19,10 @@
 
 ​	🏀models ：数据结构里会用到的一些模型
 
+#### 懒人导航
+
+待更新🛠。。。
+
 #### 鸣谢
 
 > Atwood's Law: Any application that can be written in JavaScript, will eventually be written in JavaScript.
@@ -39,8 +43,10 @@
 
 ❤如果你有更好的点子，欢迎 ~~fuck~~ fork me。
 
+---
 
+**少摆烂，多加油。**
 
-
+axing521，bugzilla，ACBash，loveford，逐爱福特，撕裂天堂，摆烂之罪bzzb等众多小伙伴已经加入这个公众号，快来关注一下吧🍖
 
 ![](https://mmbiz.qpic.cn/mmbiz_png/rxKvItX9KKwmOhyNAq9sbf7RZedWqQtK2SvcB3D4IGHTPUIqF98XRYWgXyPWl6NWzftV03FE1EZCEiayuKpc02Q/0?wx_fmt=png)
