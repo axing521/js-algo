@@ -2,20 +2,20 @@
 
 ---
 
-作者：ACBash
+作者：[ACBash](https://leetcode-cn.com/u/acbash)
 
 
 #### 食用指南
 
 ​	🚗通用模块文件`/util.js`放在根目录了 ，其他根目录文件不需要看
 
-​	✔**leetcode-ACBash**  ：我写的力扣题解（JavaScript语言），会后续更新
+​	✔**leetcode-ACBash**  ：我写的力扣题解（JavaScript语言），会后续更新，对于已经在刷题的同学是很嗯的干货
 
 ​	✍**data-structure**  ：读完洛伊安妮的JS数据结构算法后，整理总结的数据结构
 
-​	🚀**algorithm**  ：同上，整理的算法
+​	🚀**algorithm**  ：同上，整理的算法，初学者可以先看看`data-strucure`和`algorithm`，基础打牢还是比较重要的
 
-​	😒lib ：准备自己写点常用的功能库
+​	😒lib ：准备自己写点常用的功能库或者模板
 
 ​	🏀models ：数据结构里会用到的一些模型
 
