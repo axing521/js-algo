@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-10-16 16:20:54
  * @last_modify:ACBash
- * @modify_time:21-10-16 17:54:11
- * @line_count:28
+ * @modify_time:21-10-18 17:16:45
+ * @line_count:30
  **/
 
 /* 单调栈yyds */
@@ -34,3 +34,5 @@ const removeDuplicateLetters = (s) => {
     }
     return stack.join("");
 }
+
+/* 如果不用includes呢？能不能用对象或者集合存储信息？下次试试 */
