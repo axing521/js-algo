@@ -1,3 +1,11 @@
+/***
+ * @creater:ACBash
+ * @create_time:21-10-20 22:8:25
+ * @last_modify:ACBash
+ * @modify_time:21-10-20 22:8:25
+ * @line_count:63
+ **/
+
 /* 测试用例 */
 /* console.log(largestRectangleArea([2,1,5,6,2,3])); */
 /* console.log(largestRectangleArea([2,4])); */
@@ -43,3 +51,21 @@ const largestRectangleArea = (heights) => {
     }
     return maxArea;
 };
+
+/* 最佳实践 */
+//（左边，用于while循环内pop后的stack可能会空栈情况，右边，弹出栈内所有
+const largestRectangleArea = (heights) => {
+    let stack = [], maxArea = 0;
+    heights = [0,...heights,0];     //细品这左右两哨兵的作用
+    for(let i=0; i<heights.length; i++){
+        while(stack.length && heights[stack[stack.length-1]] > heights[i]){
+            //好好想想这段代码什么意思
+            maxArea = Math.max(maxArea, heights[stack.pop()] * (i - stack[stack.length-1] - 1));    
+        }
+        stack.push(i);
+    }
+
+    return maxArea;
+};
+
+console.log(largestRectangleArea([5,4,1,2]));
