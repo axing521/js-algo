@@ -4,6 +4,8 @@
 
 作者：[ACBash](https://leetcode-cn.com/u/acbash)
 
+概要：整理了常用的数据结构，算法，以及leetcode的题解，分享给大家❤
+
 
 #### 食用指南
 
@@ -39,7 +41,7 @@
 
 ---
 
-😘如果你喜欢我的这个小项目的话，那就点个star✨吧。
+😘如果你喜欢这个little-project的话，那就点个star✨吧。
 
 ❤如果你有更好的点子，欢迎 ~~fuck~~ fork me。
 
