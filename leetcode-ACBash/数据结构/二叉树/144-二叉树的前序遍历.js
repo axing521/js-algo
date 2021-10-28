@@ -2,11 +2,11 @@
  * @creater:ACBash
  * @create_time:21-10-26 19:53:19
  * @last_modify:ACBash
- * @modify_time:21-10-26 20:29:19
- * @line_count:36
+ * @modify_time:21-10-28 14:18:34
+ * @line_count:38
  **/
 
-/* 经典递归|前序遍历，没什么好说的 */
+/* 1.递归 */
 const preorderTraversal = (root) => {
     let ans = [];
 
@@ -23,10 +23,10 @@ const preorderTraversal = (root) => {
     return ans;
 };
 
-/* 用栈迭代模拟递归|撞墙法 */
+/* 2.模拟栈迭代 */
 const preorderTraversal = (root) => {
     if(!root) return [];
-    let ans = [], stack = [], node = root;
+    let ans = [], node = root, stack = [];
 
     while(node || stack.length){
         while(node){
@@ -34,11 +34,13 @@ const preorderTraversal = (root) => {
             stack.push(node);
             node = node.left;
         }
+
         node = stack.pop();
+
         node = node.right;
     }
 
     return ans;
 };
 
-/* Morris前序遍历？下次看看 */
+/* 3.Morris前序遍历？ */
