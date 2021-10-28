@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-10-25 15:17:54
  * @last_modify:ACBash
- * @modify_time:21-10-25 15:51:51
- * @line_count:58
+ * @modify_time:21-10-28 14:50:7
+ * @line_count:63
  **/
 
 /* 1.递归 */
@@ -12,25 +12,27 @@ const inorderTraversal = (root) => {
 
     const inorder = (node) => {
         if(!node) return;
+        
         inorder(node.left);
         ans.push(node.val);
         inorder(node.right);
     };
-    
+
     inorder(root);
 
     return ans;
 };
 
-/* 2.迭代 */
+/* 2.模拟栈迭代 */
 const inorderTraversal = (root) => {
-    let ans = [], stack = [], node = root;
+    let ans = [], stack = [], node= root;
 
     while(node || stack.length){
         while(node){
             stack.push(node);
             node = node.left;
         }
+
         node = stack.pop();
         ans.push(node.val);
         node = node.right;
@@ -39,26 +41,29 @@ const inorderTraversal = (root) => {
     return ans;
 };
 
-/* 3.Morris中序遍历,找左子树的最右点 */
+/* 3.Morris中序遍历，属于迭代，优点是能够O(1)空间 */
+/* 核心：找左子树的最右节点|前溯点 */
 const inorderTraversal = (root) => {
-    let ans = [], pred = null, node = root;
+    let ans = [], node = root, pred = null;
 
     while(node){
-        if(node.left){
-            pred = node.left;
+        pred = node.left;
+        if(pred){
             while(pred.right && pred.right != node){
                 pred = pred.right;
             }
+
             if(pred.right == node){
                 ans.push(node.val);
-                node = node.right;
+                node = node.right;  //报告长官，左边的已经探索完了，请您往右边走吧！
             }else{
                 pred.right = node;
                 node = node.left;
             }
+
         }else{
             ans.push(node.val);
-            node = node.right;  //回家or遍历右边子树
+            node = node.right;
         }
     }
 
