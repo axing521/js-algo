@@ -2,36 +2,28 @@
  * @creater:ACBash
  * @create_time:21-10-24 16:43:45
  * @last_modify:ACBash
- * @modify_time:21-10-25 17:18:31
- * @line_count:29
+ * @modify_time:21-10-30 17:29:50
+ * @line_count:21
  **/
 
-/* BFS,队列 */
+/* BFS|队列 */
 const levelOrder = (root) => {
     if(!root) return [];
-    const items = [];
-    const queue = [root,null];  //待访问队列
-    let levelNodes = [];
+    let ans = [], queue = [root,null], levelNodes = [];
 
-    while(queue.length > 0){
-        const t = queue.shift();
+    while(queue.length){
+        const top = queue.shift();
 
-        if(t){
-            levelNodes.push(t.val);
-            if(t.left){
-                queue.push(t.left);
-            }
-            if(t.right){
-                queue.push(t.right);
-            }
+        if(top){
+            levelNodes.push(top.val);
+            if(top.left) queue.push(top.left);
+            if(top.right) queue.push(top.right);
         }else{
-            items.push(levelNodes);
+            ans.push(levelNodes);
             levelNodes = [];
-            if(queue.length > 0){
-                queue.push(null);
-            }
+            if(queue.length) queue.push(null);
         }
     }
 
-    return items;
+    return ans;
 };
