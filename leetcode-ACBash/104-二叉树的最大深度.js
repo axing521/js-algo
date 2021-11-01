@@ -2,21 +2,21 @@
  * @creater:ACBash
  * @create_time:21-10-25 19:31:46
  * @last_modify:ACBash
- * @modify_time:21-10-26 19:53:51
+ * @modify_time:21-11-1 15:42:2
  * @line_count:25
  **/
 
-/* BFS,层序遍历，找多少层就行，和102，103差不多啊 */
+/* 1.BFS,层序遍历，找多少层就行，和102，103差不多啊 */
 const maxDepth = (root) => {
-    if(!root) return 0;
-    let ans = 0, queue = [root,null];
+    if(!root) return 0
+    let queue = [root, null], ans = 0;
 
     while(queue.length){
-        const cur = queue.shift();
+        const top = queue.shift();
 
-        if(cur){
-            if(cur.left) queue.push(cur.left);
-            if(cur.right) queue.push(cur.right);
+        if(top){
+            if(top.left) queue.push(top.left);
+            if(top.right) queue.push(top.right);
         }else{
             ans++;
             if(queue.length) queue.push(null);
@@ -26,7 +26,7 @@ const maxDepth = (root) => {
     return ans;
 };
 
-/* DFS,用递归，是真牛逼啊 */
+/* 2.DFS,用递归，是真牛逼啊 */
 const maxDepth = (root) => {
     if(!root) return 0;
     return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
