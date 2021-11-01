@@ -2,23 +2,22 @@
  * @creater:ACBash
  * @create_time:21-10-25 17:18:32
  * @last_modify:ACBash
- * @modify_time:21-10-25 19:31:48
- * @line_count:23
+ * @modify_time:21-11-1 14:31:25
+ * @line_count:22
  **/
 
 /* 跟LC-102很像 */
 const zigzagLevelOrder = (root) => {
     if(!root) return [];
-    let ans = [], queue = [root,null], levelNodes = [], flag = true;
+    let ans = [], levelNodes = [], queue = [root,null], flag = true;
 
     while(queue.length){
-        const cur = queue.shift();
+        const top = queue.shift();
 
-        if(cur){
-            flag ? levelNodes.push(cur.val) : levelNodes.unshift(cur.val);
-            if(cur.left) queue.push(cur.left);
-            if(cur.right) queue.push(cur.right);
-            
+        if(top){
+            flag ? levelNodes.push(top.val) : levelNodes.unshift(top.val);
+            if(top.left) queue.push(top.left);
+            if(top.right) queue.push(top.right);
         }else{
             flag = !flag;
             ans.push(levelNodes);
