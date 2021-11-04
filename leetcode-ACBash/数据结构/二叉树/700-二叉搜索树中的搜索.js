@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-11-4 11:49:1
  * @last_modify:ACBash
- * @modify_time:21-11-4 13:34:3
- * @line_count:25
+ * @modify_time:21-11-4 13:40:21
+ * @line_count:36
  **/
 
 /* 1.中序遍历，O(n) */
@@ -30,4 +30,15 @@ const searchBST = (root, val) => {
     if(root.val == val) return root;
     else if(root.val < val) return searchBST(root.right, val);
     else return searchBST(root.left, val);
+};
+
+/* 3.定义迭代解 */
+const searchBST = (root, val) => {
+    while(root){
+        if(root.val == val) return root;
+        else if(root.val < val) root = root.right;
+        else root = root.left;
+    }
+
+    return null;
 };
