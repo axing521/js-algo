@@ -2,7 +2,7 @@
  * @creater:ACBash
  * @create_time:21-11-2 15:35:18
  * @last_modify:ACBash
- * @modify_time:21-11-2 18:7:7
+ * @modify_time:21-11-4 14:14:43
  * @line_count:204
  **/
 
@@ -164,7 +164,7 @@ const insertIntoBST = (root, val) => {
     return root;
 };
 
-/* LC:模拟，这才是聪明的做法！ */
+/* BST定义解|迭代实现 */
 const insertIntoBST = (root, val) => {
     let insertNode = new TreeNode(val);
     if(!root) return insertNode;
@@ -191,17 +191,17 @@ const insertIntoBST = (root, val) => {
     return root;
 };
 
-/* 其实上面这个while循环可以写成一个递归 */
+/* BST定义解|递归实现 */
 const insertIntoBST = (root, val) => {
     let insertNode = new TreeNode(val);
     if(!root) return insertNode;
 
     const insert = (node, isn) => {
         if(isn.val < node.val){
-            if(!node.left) return node.left = isn;
+            if(!node.left) node.left = isn;
             else insert(node.left, isn);
         }else{
-            if(!node.right) return node.right = isn;
+            if(!node.right) node.right = isn;
             else insert(node.right, isn);
         }
     }
