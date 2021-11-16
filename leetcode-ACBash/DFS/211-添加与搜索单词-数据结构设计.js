@@ -2,11 +2,11 @@
  * @creater:ACBash
  * @create_time:21-11-10 12:58:45
  * @last_modify:ACBash
- * @modify_time:21-11-10 19:58:6
- * @line_count:92
+ * @modify_time:21-11-16 16:38:23
+ * @line_count:93
  **/
 
-/* LC,DFS,字典树 */
+/* LC,DFS,字典树,用数组实现 */
 class TrieNode{
     constructor(){
         this.children = new Array(26).fill(0);
@@ -62,38 +62,39 @@ class WordDictionary{
     }
 }
 
-/* 2. */
+/* 2.这个好一点 */
 class WordDictionary{
     constructor(){
-        this.root = Object.create(null);
+        this.children = {};
     }
 
     addWord(word){
-        let node = this.root;
+        let node = this.children;
+
         for(const c of word){
-            if(!node[c]) node[c] = {};
+            if(!node[c]) node[c] = {"isEnd": false};
             node = node[c];
         }
-        node.isEnd = true;
+
+        node["isEnd"] = true;
     }
 
-    search(word, node = this.root){
-        let c = undefined;
+    search(word, node = this.children){
+        //有点奇怪的是，下面必须这样迭代i，不能const i in word，不然报错
         for(let i=0; i<word.length; i++){
-            c = word[i];
-            if(c == "."){
-                for(const key in node){
-                    if(this.search(word.slice(i+1), node[key])){
-                        return true;
-                    }
+            const c = word[i];
+            if(c == "."){ 
+                for(const son in node){
+                    if(this.search(word.slice(i + 1), node[son])) return true;
                 }
                 return false;
-            }else if(!node[c]){
-                return false;
+
             }
+            if(!node[c]) return false;
             node = node[c];
         }
-        return Boolean(node.isEnd);
+
+        return node["isEnd"];
     }
 }
 
