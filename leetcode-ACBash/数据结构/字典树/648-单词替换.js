@@ -2,32 +2,29 @@
  * @creater:ACBash
  * @create_time:21-11-8 20:46:53
  * @last_modify:ACBash
- * @modify_time:21-11-9 21:28:57
- * @line_count:164
+ * @modify_time:21-11-16 15:9:58
+ * @line_count:162
  **/
 
+/* 四种解法，比较好的是“API怪”和“字典树思想” */
 /* 暴力法，API怪，你还别说，api还真就是爹，84ms */
-const shortestRoot = (word, dictionary) => {
-    let shortest = Infinity, ans = word;
-
-    for(const root of dictionary){
-        if(root.length < shortest && word.startsWith(root)){
-            ans = root;
-            shortest = root.length;
-        }
-    }
-
-    return ans;
-};
-
 const replaceWords = (dictionary, sentence) => {
     const words = sentence.split(" ");
 
-    const replaced = words.map(val => shortestRoot(val, dictionary));
+    const search = (word) => {
+        let min = Infinity, ans = word;
 
-    const ans = replaced.join(" ");
-    
-    return ans;
+        for(const root of dictionary){
+            if(root.length < min && word.startsWith(root)){
+                ans = root;
+                min = root.length;
+            }
+        }
+
+        return ans;
+    };
+
+    return words.map(word => search(word)).join(" ");
 };
 
 /* 字典树模板化，150ms，因为对每个单词都构造字典树，优化思路可以从复用字典树入手 */
@@ -75,7 +72,7 @@ const shortestRoot = (word, dictionary) => {
     trie.insert(word);
 
     for(const root of dictionary){
-        if(trie.startsWith(root) && root.length < shortest){
+        if(root.length < shortest && trie.startsWith(root)){
             ans = root;
             shortest = root.length;
         }
@@ -94,42 +91,43 @@ const replaceWords = (dictionary, sentence) => {
     return ans;
 };
 
-/* 字典树思想,bug干掉了 */
-const shortestRoot = (word, trie) => {
-    let node = trie;
-
-    for(const c of word){
-        if(!node[c]) return word;
-        else if(!node[c][isEnd]) node = node[c];
-        else return node[c]["val"];
-    }
-
-    return word;
-};
-
-const insert = (word, trie) => {
-    let node = trie;
-
-    for(const c of word){
-        if(!node[c]) node[c] = {"isEnd": false};
-        node = node[c];
-    }
-
-    node["isEnd"] = true;
-    node["val"] = word;
-}
-
+/* 字典树思想 */
 const replaceWords = (dictionary, sentence) => {
-    let trie = {};
-    for(const root of dictionary) insert(root, trie);
+    const buildTrie = (dictionary) => {
+        let root = {};
+
+        for(const word of dictionary){
+            let node = root;
+
+            for(const c of word){
+                if(!node[c]) node[c] = {"isEnd": false};
+                node = node[c];
+            }
+
+            node["isEnd"] = true;
+            node["word"] = word;
+        }
+
+        return root;
+    };
+
+    let trie = buildTrie(dictionary);
+
+    const search = (word) => {
+        let node = trie;
+
+        for(const c of word){
+            if(!node[c]) return word;
+            if(node[c]["isEnd"]) return node[c]["word"];
+            node = node[c];
+        }
+
+        return word;
+    };
 
     const words = sentence.split(" ");
 
-    const replaced = words.map(val => shortestRoot(val, trie));
-
-    const ans = replaced.join(" ");
-
-    return ans;
+    return words.map(word => search(word)).join(" ");
 };
 
 /* LC,相当于精简上面的做法 */
