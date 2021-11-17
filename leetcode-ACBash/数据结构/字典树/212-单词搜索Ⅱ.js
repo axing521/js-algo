@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-11-14 14:27:31
  * @last_modify:ACBash
- * @modify_time:21-11-14 17:8:5
- * @line_count:154
+ * @modify_time:21-11-17 12:0:55
+ * @line_count:200
  **/
 
 /* 哈希表，坐标数组，DFS */
@@ -111,13 +111,61 @@ const findWords = (board, words) => {
     return words.filter(word => trie.find(word));
 };
 
+//写的爽一点
+const findWords = (board, words) => {
+    const m = board.length, n = board[0].length;
+    const maxLen = words.reduce((prev, cur) => Math.max(prev, cur.length), 0);
+    let flagBoard = new Array(m * n).fill(false);   //不能用矩阵，只能一维数组，不然报错，为什么？
+
+    const insert = (i, j, dep, node) => {
+        if(dep == 0) return;
+        if(i < 0 || j < 0 || i >= m || j >= n) return;
+        if(flagBoard[i * n + j]) return;
+        flagBoard[i * n + j] = true;
+        
+        const c = board[i][j];
+        node = node[c] = node[c] || {};
+
+        insert(i + 1, j, dep - 1, node);
+        insert(i - 1, j, dep - 1, node);
+        insert(i, j + 1, dep - 1, node);
+        insert(i, j - 1, dep - 1, node);
+
+        flagBoard[i * n + j] = false;
+    };
+    const buildTrie = () => {
+        let root = {};
+        for(let i = 0; i < m; i++){
+            for(let j = 0; j < n; j++){
+                insert(i, j, maxLen, root);
+            }
+        }
+        return root;
+    };  //板子的插入不同于之前的words，需要DFS插入所有情况
+
+    let trie = buildTrie();
+
+    const search = (word) => {
+        let node = trie;
+
+        for(const c of word){
+            if(!node[c]) return false;
+            node = node[c];
+        }
+
+        return true;
+    };
+
+    return words.filter(word => search(word));
+};
+
 /* LC, 字典树，把words插到字典树中，在字典树中找board*/
 const findWords = (board, words) => {
-    const ans = [], m = board.length, n = board[0].length;  
+    const m = board.length, n = board[0].length;
+    let ans = [];
 
-    const getTrie = (words) => {
+    const buildTrie = (words) => {
         let root = {};
-
         for(const word of words){
             let node = root;
             for(const c of word){
@@ -126,35 +174,33 @@ const findWords = (board, words) => {
             }
             node["word"] = word;
         }
-
         return root;
     };
 
-    const find = (node, i, j) => {
+    let trie = buildTrie(words);
+
+    const search = (node, i, j) => {
         if(node["word"]){
             ans.push(node["word"]);
             node["word"] = null;
         }
-
         if(i < 0 || j < 0 || i >= m || j >= n) return;
-        if(!node[board[i][j]]) return;
 
-        let charCache = board[i][j];
+        const c = board[i][j];
+        if(!node[c]) return;
         board[i][j] = "#";
 
-        find(node[charCache], i + 1, j);
-        find(node[charCache], i - 1, j);
-        find(node[charCache], i, j + 1);
-        find(node[charCache], i, j - 1);
+        search(node[c], i + 1, j);
+        search(node[c], i - 1, j);
+        search(node[c], i, j + 1);
+        search(node[c], i, j - 1);
 
-        board[i][j] = charCache;
+        board[i][j] = c;
     };
-
-    const trie = getTrie(words);
 
     for(let i = 0; i < m; i++){
         for(let j = 0; j < n; j++){
-            find(trie, i, j);
+            search(trie, i, j);
         }
     }
 
