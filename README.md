@@ -1,4 +1,4 @@
-### 用js学数据结构与算法（上次更新2021/10/9）
+### 用js学数据结构与算法（上次更新2021/11/19）
 
 ---
 
@@ -24,6 +24,8 @@
 
 #### 懒人导航
 
+> “我知道你们这些家伙懒，我也懒，就写了根目录的README，后续有时间找机会我把其他的补上🕊”
+
 1. **数据结构实现**
    * [栈](https://github.com/axing521/js-algo/tree/main/data-structure/stack)
    * [链表（链表 + 栈实现链表 + 有序链表 + 双向链表 + 循环链表）](https://github.com/axing521/js-algo/tree/main/data-structure/linked-list)
@@ -35,11 +37,25 @@
    * [图](https://github.com/axing521/js-algo/tree/main/data-structure/graph)
 
 2. **算法实现**
-   * 
+   * [查找（顺序 + 二分 + 插值）](https://github.com/axing521/js-algo/tree/main/algorithm/search)
+   * [排序（冒泡 + 选择 + 计数 + 插值 + 快排 + 基数 + 桶 + 堆 + 归并）](https://github.com/axing521/js-algo/tree/main/algorithm/sort)
+   * [图（BFS + DFS + 最短路径 + 最小生成树 + dijkstra + floyd + kruskal + prim）](https://github.com/axing521/js-algo/tree/main/algorithm/graph)
+   * [经典算法（分而治之 + DP + 洗牌 + 汉诺塔 。。。）](https://github.com/axing521/js-algo/tree/main/algorithm/classic)
 3. **力扣题解**
-   * 
+   * [一口气帮你搞定二叉树](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/数据结构/二叉树)
+   * [字典树系列](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/数据结构/字典树)
+   * [栈（单调栈我啊，可是很难的哦）](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/数据结构/栈)
+   * [哈希表](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/数据结构/哈希表)
+   * [BFS系列](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/BFS)
+   * [DFS系列](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/DFS)
+   * [DP](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/DP)
+   * [二分](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/二分法)
+   * [一口气搞定前缀和](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/前缀和)
+   * [我超，滑动窗口](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/滑动窗口)
+   * [二进制](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/二进制)
+   * [分而治之](https://github.com/axing521/js-algo/tree/main/leetcode-ACBash/分而治之)
 4. **封装库**
-   * 
+   * [Morris遍历模板 + 双色标记法 + 字典树 + 单调栈 + 最大堆 + 深复制](https://github.com/axing521/js-algo/tree/main/lib)
 
 #### 鸣谢
 
