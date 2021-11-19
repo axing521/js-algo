@@ -6,8 +6,9 @@
 
 概要：整理了常用的数据结构，算法，以及leetcode的题解，分享给大家❤
 
-
 #### 食用指南
+
+​	📌真的是干货满满，强烈建议clone到本地进行食用
 
 ​	🚗通用模块文件`/util.js`放在根目录了 ，其他根目录文件不需要看
 
@@ -23,7 +24,22 @@
 
 #### 懒人导航
 
-待更新🛠。。。
+1. **数据结构实现**
+   * [栈](https://github.com/axing521/js-algo/tree/main/data-structure/stack)
+   * [链表（链表 + 栈实现链表 + 有序链表 + 双向链表 + 循环链表）](https://github.com/axing521/js-algo/tree/main/data-structure/linked-list)
+   * [队列（队列 + 双端队列）](https://github.com/axing521/js-algo/tree/main/data-structure/queue)
+   * [集合](https://github.com/axing521/js-algo/tree/main/data-structure/set)
+   * [字典 & 哈希表（字典 + 哈希表 + 散列集合（分离链接/线性探测 实现））](https://github.com/axing521/js-algo/tree/main/data-structure/dictionary-and-hashTable)
+   * [树（二叉搜索树 + 自平衡二叉搜索树 + 红黑树）](https://github.com/axing521/js-algo/tree/main/data-structure/tree)
+   * [堆（最大堆 + 最小堆）](https://github.com/axing521/js-algo/tree/main/data-structure/heap)
+   * [图](https://github.com/axing521/js-algo/tree/main/data-structure/graph)
+
+2. **算法实现**
+   * 
+3. **力扣题解**
+   * 
+4. **封装库**
+   * 
 
 #### 鸣谢
 
