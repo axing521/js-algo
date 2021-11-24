@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-11-23 10:56:48
  * @last_modify:ACBash
- * @modify_time:21-11-23 17:38:51
- * @line_count:86
+ * @modify_time:21-11-24 22:30:37
+ * @line_count:129
  **/
 
 //times数组记录图中的所有“边”信息 => [u, v, w];
@@ -84,7 +84,50 @@ const networkDelayTime = (times, n, k) => {
 };
 
 /* 找最近节点的时候可以用最小堆，下次试试看 */
+const dijkstra = (graph, start, end) => {
+    const visited = new Set();
+    const minHeap = new MinPriorityQueue(); //LC内置API
 
+    minHeap.enqueue(start, 0);
+
+    while(!minHeap.isEmpty()){
+        const {element, priority} = minHeap.dequeue();
+        const curPoint = element;
+        const curCost = priority;
+
+        if(visited.has(curPoint)) continue;
+        visited.add(curPoint);
+        if(curPoint == end) return curCost;
+
+        if(!graph[curPoint]) continue;
+        for(const [nextPoint, nextCost] of graph[curPoint]){
+            if(visited.has(nextPoint)) continue;
+
+            const accumulatedCost = nextCost + curCost;
+            minHeap.enqueue(nextPoint, accumulatedCost);
+        }
+    }
+
+    return -1;
+};
+
+const networkDelayTime = (times, n, k) => {
+    let graph = {}, ans = -1;
+
+    for(const [from, to, weight] of times){
+        if(!graph[from]) graph[from] = [];
+        graph[from].push([to, weight]);
+    }
+
+    for(let to = 1; to <= n; to++){
+        const dist = dijkstra(graph, k, to);
+
+        if(dist == -1) return -1;
+        ans = Math.max(ans, dist);
+    }
+
+    return ans;
+};
 /* 还有BFS的 */
 
 /* floyd */

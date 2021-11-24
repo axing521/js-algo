@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-11-23 10:56:48
  * @last_modify:ACBash
- * @modify_time:21-11-24 22:30:46
- * @line_count:129
+ * @modify_time:21-11-24 22:28:29
+ * @line_count:130
  **/
 
 //times数组记录图中的所有“边”信息 => [u, v, w];
@@ -128,6 +128,7 @@ const networkDelayTime = (times, n, k) => {
 
     return ans;
 };
+
 /* 还有BFS的 */
 
 /* floyd */
