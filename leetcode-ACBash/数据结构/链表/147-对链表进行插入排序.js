@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-12-8 16:24:8
  * @last_modify:ACBash
- * @modify_time:21-12-9 12:10:27
- * @line_count:57
+ * @modify_time:21-12-9 12:27:41
+ * @line_count:85
  **/
 
 /* 两层while，外层遍历要插入的节点，内层遍历已排序的链表 */
@@ -59,6 +59,34 @@ const insertionSortList = (head) => {
         }
 
         cur = tail.next;
+    }
+
+    return dummy.next;
+};
+
+/* Lucifer,完美融合 */
+const insertionSortList = (head) => {
+    const dummy = new ListNode(-Infinity);
+    let tail = dummy;
+
+    while(head){
+        const headNext = head.next;
+        let node = dummy;
+
+        if(tail.val <= head.val){
+            tail.next = head;
+            tail = tail.next;
+            head.next = null;
+            head = headNext;
+            continue;
+        }
+        
+        while(node.next && node.next.val < head.val) node = node.next;
+
+        head.next = node.next;
+        node.next = head;
+        
+        head = headNext;
     }
 
     return dummy.next;
