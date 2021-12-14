@@ -2,26 +2,26 @@
  * @creater:ACBash
  * @create_time:21-11-1 14:31:17
  * @last_modify:ACBash
- * @modify_time:21-11-1 15:26:44
- * @line_count:110
+ * @modify_time:21-12-14 14:3:30
+ * @line_count:108
  **/
 
 /* 1.中序遍历-递归实现 */
 const isValidBST = (root) => {
-    let visited = [];
+    let inorder = [];
 
-    const inorder = (node) => {
+    const inorderTraversal = (node) => {
         if(!node) return;
 
-        inorder(node.left);
-        visited.push(node.val);
-        inorder(node.right);
+        inorderTraversal(node.left);
+        inorder.push(node.val);
+        inorderTraversal(node.right);
     };
 
-    inorder(root);
+    inorderTraversal(root);
 
-    for(let i=1; i<visited.length; i++){
-        if(visited[i] <= visited[i-1]) return false;
+    for(let i = 1; i < inorder.length; i++){
+        if(inorder[i] <= inorder[i - 1]) return false;
     }
 
     return true;
@@ -29,7 +29,7 @@ const isValidBST = (root) => {
 
 /* 2.中序遍历-模拟栈迭代实现，可以在发现不满足的时候跳出来 */
 const isValidBST = (root) => {
-    let stack = [], node = root, max = -Infinity;
+    let node = root, stack = [], max = -Infinity;
 
     while(node || stack.length){
         while(node){
@@ -39,8 +39,8 @@ const isValidBST = (root) => {
 
         node = stack.pop();
         /* -迭代可以中途退出- */
-        if(max < node.val) max = node.val;
-        else return false;
+        if(max >= node.val) return false;
+        max = node.val;
         /* -迭代可以中途退出- */
         node = node.right;
     }
@@ -50,7 +50,7 @@ const isValidBST = (root) => {
 
 /* 3.中序遍历-Morris实现 */
 const isValidBST = (root) => {
-    let pred = null, node = root, max = -Infinity;
+    let node = root, pred = null, max = -Infinity;
 
     while(node){
         pred = node.left;
@@ -60,21 +60,20 @@ const isValidBST = (root) => {
                 pred = pred.right;
             }
 
-            if(pred.right == node){
+            if(pred.right){
                 /* -迭代可以中途退出- */
-                if(max < node.val) max = node.val;
-                else return false;
+                if(max >= node.val) return false;
+                max = node.val;
                 /* -迭代可以中途退出- */
                 node = node.right;
             }else{
                 pred.right = node;
                 node = node.left;
             }
-
         }else{
             /* -迭代可以中途退出- */
-            if(max < node.val) max = node.val;
-            else return false;
+            if(max >= node.val) return false;
+            max = node.val;
             /* -迭代可以中途退出- */
             node = node.right;
         }
@@ -87,29 +86,28 @@ const isValidBST = (root) => {
 const isValidBST = (root, min = -Infinity, max = Infinity) => {
     if(!root) return true;
 
-    if(root.val <= min) return false;
-    if(root.val >= max) return false;
-
+    if(root.val <= min || root.val >= max) return false;
+    
     return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
 };
 
 /* 5.中序遍历-双色标记法 */
 const isValidBST = (root) => {
     const [WHITE, GRAY] = [0, 1];
-    let stack = [[root, WHITE]], max = -Infinity;
+    let stack = [[WHITE, root]], max = -Infinity;
 
     while(stack.length){
-        const [node, color] = stack.pop();   //这里其实可以解构赋值，看着更清爽
-        if(!node) continue;
+        const [color, node] = stack.pop();
 
+        if(!node) continue;
         if(color == WHITE){
-            stack.push([node.right, WHITE]);
-            stack.push([node, GRAY]);
-            stack.push([node.left, WHITE]);
+            stack.push([WHITE, node.right]);
+            stack.push([GRAY, node]);
+            stack.push([WHITE, node.left]);
         }else{
             /* -迭代可以中途退出- */
-            if(max < node.val) max = node.val;
-            else return false;
+            if(max >= node.val) return false;
+            max = node.val;  
             /* -迭代可以中途退出- */
         }
     }
