@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-11-7 22:9:33
  * @last_modify:ACBash
- * @modify_time:21-11-7 22:52:51
- * @line_count:14
+ * @modify_time:21-12-14 18:28:21
+ * @line_count:29
  **/
 
 /* 中序遍历|二分构造|分而治之 */
@@ -16,6 +16,21 @@ const sortedArrayToBST = (nums) => {
         nums[mid],
         sortedArrayToBST(nums.slice(0, mid)),
         sortedArrayToBST(nums.slice(mid + 1))
+    );
+
+    return root;
+};
+
+/* 避免slice的额外空间开销 */
+const sortedArrayToBST = (nums, start = 0, end = nums.length) => {
+    if(start >= end) return null;
+
+    const mid = (start + end) >> 1;
+
+    let root = new TreeNode(
+        nums[mid],
+        sortedArrayToBST(nums, start, mid),
+        sortedArrayToBST(nums, mid + 1, end)
     );
 
     return root;
