@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-12-20 13:56:35
  * @last_modify:ACBash
- * @modify_time:21-12-20 15:55:24
- * @line_count:139
+ * @modify_time:21-12-20 17:0:18
+ * @line_count:135
  **/
 
 /* 跟LC-632一样，滑动窗口，关键点是能否看出矩阵 */
@@ -117,10 +117,6 @@ class Heap{
         return this.container[0];
     }
 
-    end(){
-        return this.end;
-    }
-
     size(){
         return this.container.length;
     }
@@ -140,7 +136,7 @@ const minimumDeviation = (nums) => {
 
         maxHeap.insert(max >> 1);
 
-        ans = Math.min(ans, maxHeap.top() - maxHeap.end());
+        ans = Math.min(ans, maxHeap.top() - maxHeap.end);
     }   //遇到奇数了，已经是最后的了，跳出
 
     return ans;
