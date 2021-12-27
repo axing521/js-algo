@@ -83,6 +83,6 @@
 
 **少摆烂，多加油。**
 
-axing521，bugzilla，ACBash，loveford，逐爱福特，撕裂天堂，摆烂之罪bzzb等众多小伙伴已经加入这个公众号，快来关注一下吧🍖
+想了解我？我在这个公众号分享我的日常🤤
 
 ![](https://mmbiz.qpic.cn/mmbiz_png/rxKvItX9KKwmOhyNAq9sbf7RZedWqQtK2SvcB3D4IGHTPUIqF98XRYWgXyPWl6NWzftV03FE1EZCEiayuKpc02Q/0?wx_fmt=png)
