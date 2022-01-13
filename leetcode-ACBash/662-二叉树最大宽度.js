@@ -2,10 +2,11 @@
  * @creater:ACBash
  * @create_time:22-1-12 21:34:11
  * @last_modify:ACBash
- * @modify_time:22-1-13 13:42:16
- * @line_count:53
+ * @modify_time:22-1-13 20:15:4
+ * @line_count:75
  **/
 
+/* 想象成二叉堆的模型 */
 /* BFS */
 const widthOfBinaryTree = (root) => {
     if(!root) return 0;
@@ -56,6 +57,27 @@ const widthOfBinaryTree = (root) => {
             }
         }
     }
+
+    return ans;
+};
+
+/* DFS,会遇到大数，使用BigInt */
+const widthOfBinaryTree = (root) => {
+    if(!root) return 0;
+
+    let ans = 0n, map = new Map();
+
+    const dfs = (node, level, pos) => {
+        if(!map.has(level)) map.set(level, pos);
+        
+        const val = pos - map.get(level) + 1n;
+        if(val > ans) ans = val;
+
+        node.left && dfs(node.left, level + 1, pos * 2n + 1n);
+        node.right && dfs(node.right, level + 1, pos * 2n + 2n);
+    };
+
+    dfs(root, 0, 0n);
 
     return ans;
 };
