@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-12-13 15:36:19
  * @last_modify:ACBash
- * @modify_time:21-12-13 16:5:24
- * @line_count:44
+ * @modify_time:22-1-19 17:55:10
+ * @line_count:72
  **/
 
 /* 思路参考LC-105 */
@@ -49,4 +49,32 @@ const bstFromPreorder = (preorder) => {
     };
 
     return build(preorder, inorder);
+};
+
+/* DFS，分而治之 */
+const bstFromPreorder = (preorder) => {
+    const sonPreorder = (preorder, cmp) => {
+        let ans = [], rootVal = preorder[0];
+
+        for(let i = 1; i < preorder.length; i++){
+            if(cmp(preorder[i], rootVal)) ans.push(preorder[i]);
+        }
+
+        return ans;
+    };
+    
+    const dfs = (preorder) => {
+        if(!preorder.length) return null;
+
+        const left = sonPreorder(preorder, (a, b) => a < b);
+        const right = sonPreorder(preorder, (a, b) => a > b);
+        let root = new TreeNode(preorder[0]); 
+
+        root.left = dfs(left);
+        root.right = dfs(right);
+
+        return root;
+    };
+
+    return dfs(preorder);
 };
