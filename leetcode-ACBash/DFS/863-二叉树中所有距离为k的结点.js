@@ -2,54 +2,50 @@
  * @creater:ACBash
  * @create_time:22-1-20 15:53:29
  * @last_modify:ACBash
- * @modify_time:22-1-20 19:18:5
- * @line_count:47
+ * @modify_time:22-1-24 19:59:24
+ * @line_count:43
  **/
 
 /* 转化成图，BFS */
 const distanceK = (root, target, k) => {
     let graph = {};
-
-    const dfs = (node) => {
+    
+    const dfs = (node, parent) => {
         if(!node) return;
-
-        if(node.left) node.left["parent"] = node;
-        if(node.right) node.right["parent"] = node;
-
-        dfs(node.left);
-        dfs(node.right);
         
-        graph[node.val] = [node.parent, node.left, node.right];
+        if(!graph[node.val]) graph[node.val] = [];
+        parent && graph[node.val].push(parent);
+        node.left && graph[node.val].push(node.left);
+        node.right && graph[node.val].push(node.right);
+
+        dfs(node.left, node);
+        dfs(node.right, node);
     };
 
-    dfs(root);
+    dfs(root, null);
 
     let queue = [target], ans = [], visited = new Set();
-    visited.add(target);
 
     while(queue.length){
-        if(!k) break;
         const len = queue.length;
 
         for(let i = 0; i < len; i++){
             const node = queue.shift();
-            if(!node) continue;
-
+            visited.add(node);
+            ans.push(node.val);
+            
             const neighbors = graph[node.val];
 
             for(const neighbor of neighbors){
                 if(visited.has(neighbor)) continue;
-                visited.add(neighbor);
                 queue.push(neighbor);
             }
         }
 
-        k--;
-    }
+        if(!k--) break;
 
-    queue.forEach(node => {
-        if(node) ans.push(node.val);
-    });
+        ans = [];
+    }
 
     return ans;
 };
