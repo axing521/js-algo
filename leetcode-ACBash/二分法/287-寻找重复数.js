@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:22-3-12 20:32:12
  * @last_modify:ACBash
- * @modify_time:22-3-13 17:58:7
- * @line_count:75
+ * @modify_time:22-3-28 19:55:25
+ * @line_count:98
  **/
 
 /* 暴力,一次遍历，O(n)空间 */
@@ -73,6 +73,29 @@ const findDuplicate = (nums) => {
     }while(fast != slow);
 
     fast = 0;
+
+    while(fast != slow){
+        fast = nums[fast];
+        slow = nums[slow];
+    }
+
+    return fast;
+};
+
+const findDuplicate = (nums) => {
+    let slow = nums[0], fast = nums[0];
+
+    while(fast){
+        fast = nums[fast] && nums[nums[fast]];
+        slow = nums[slow];
+
+        if(!fast) return -1;
+
+        if(fast == slow){
+            fast = nums[0];
+            break;
+        }
+    }
 
     while(fast != slow){
         fast = nums[fast];
