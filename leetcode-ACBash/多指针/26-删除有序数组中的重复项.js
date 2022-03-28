@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:22-3-13 17:58:5
  * @last_modify:ACBash
- * @modify_time:22-3-14 11:17:42
- * @line_count:19
+ * @modify_time:22-3-28 16:31:48
+ * @line_count:36
  **/
 
 /* 快慢指针，读写指针 */
@@ -24,4 +24,21 @@ const removeDuplicates = (nums) => {
     }
 
     return slow + 1;
+};
+
+const removeDuplicates = (nums) => {
+    let slow = 0, fast = 0, pre = Infinity;
+
+    while(fast < nums.length){
+        if(pre != nums[fast]){
+            nums[slow] = nums[fast];
+            pre = nums[slow];
+            fast++;
+            slow++;
+        }else{
+            fast++;
+        }
+    }
+
+    return slow;
 };
