@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-12-5 16:59:20
  * @last_modify:ACBash
- * @modify_time:21-12-6 18:9:15
- * @line_count:39
+ * @modify_time:22-3-28 19:42:54
+ * @line_count:64
  **/
 
 /* 1.用集合，空间记录换时间，时间O(n),空间O(n) */
@@ -44,4 +44,29 @@ const detectCycle = (head) => {
     }
 
     return null;
+};
+
+const detectCycle = (head) => {
+    if(!head) return null;
+
+    let slow = head, fast = head;
+
+    while(fast){
+        fast = fast.next && fast.next.next;
+        slow = slow.next;
+
+        if(!fast) return null;
+
+        if(fast == slow){
+            fast = head;
+            break;
+        }
+    }
+
+    while(fast != slow){
+        fast = fast.next;
+        slow = slow.next;
+    }
+
+    return fast;
 };
