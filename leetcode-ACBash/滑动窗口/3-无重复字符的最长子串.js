@@ -1,3 +1,11 @@
+/***
+ * @creater:ACBash
+ * @create_time:22-3-29 14:16:2
+ * @last_modify:ACBash
+ * @modify_time:22-3-29 14:16:2
+ * @line_count:51
+ **/
+
 //滑动窗口
 //用了includes，150ms
 const lengthOfLongestSubstring = (s) => {
@@ -31,3 +39,21 @@ const lengthOfLongestSubstring = (s) => {
 };
 
 console.log(lengthOfLongestSubstring("abcabcbb"));
+
+const lengthOfLongestSubstring = (s) => {
+    let slow = 0;
+    let set = new Set();
+    let ans = 0;
+
+    for(let fast = 0; fast < s.length; fast++){
+        while(set.has(s[fast])){
+            set.delete(s[slow++]);
+        }
+
+        set.add(s[fast]);
+
+        ans = Math.max(ans, fast - slow + 1);
+    }
+
+    return ans;
+};
