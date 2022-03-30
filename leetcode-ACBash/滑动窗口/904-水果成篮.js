@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-10-10 15:49:27
  * @last_modify:ACBash
- * @modify_time:21-10-10 15:50:6
- * @line_count:66
+ * @modify_time:22-3-30 17:35:54
+ * @line_count:116
  **/
 
 /* console.log(totalFruit([3,3,3,1,2,1,1,2,3,3,4])); */
@@ -66,6 +66,56 @@ const totalFruit = (fruits) => {
         }
 
         ans = Math.max(ans, pre);
+    }
+
+    return ans;
+};
+
+const totalFruit = (fruits) => {
+    let slow = 0, ans = 0;
+    let map = {}, cNum = 0;
+
+    for(let fast = 0; fast < fruits.length; fast++){
+        if(!map[fruits[fast]]){
+            map[fruits[fast]] = 0;
+            cNum++;
+        }
+        map[fruits[fast]]++;
+
+        if(cNum <= 2) ans = Math.max(ans, fast - slow + 1);
+
+        while(cNum > 2){
+            map[fruits[slow]]--;
+
+            map[fruits[slow]] == 0 && cNum--;
+
+            slow++;
+        }
+    }
+
+    return ans;
+};
+
+const totalFruit = (fruits) => {
+    let slow = 0, ans = 0;
+    let map = new Map(), cNum = 0;
+
+    for(let fast = 0; fast < fruits.length; fast++){
+        if(!map.get(fruits[fast])){
+            map.set(fruits[fast], 0);
+            cNum++;
+        }
+        map.set(fruits[fast], map.get(fruits[fast]) + 1);
+
+        if(cNum <= 2) ans = Math.max(ans, fast - slow + 1);
+
+        while(cNum > 2){
+            map.set(fruits[slow], map.get(fruits[slow]) - 1);
+
+            map.get(fruits[slow]) == 0 && cNum--;
+
+            slow++;
+        }
     }
 
     return ans;
