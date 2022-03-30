@@ -1,3 +1,11 @@
+/***
+ * @creater:ACBash
+ * @create_time:22-3-30 14:42:0
+ * @last_modify:ACBash
+ * @modify_time:22-3-30 14:42:0
+ * @line_count:62
+ **/
+
 /* console.log(minSubArrayLen(15,[5,1,3,5,10,7,4,9,2,8])); */
 /* 滑动窗口，自己写的，250ms */
 const minSubArrayLen = (target, nums) => {
@@ -40,3 +48,23 @@ const minSubArrayLen = (target, nums) => {
     }
     return len;
 }
+
+const minSubArrayLen = (target, nums) => {
+    let slow = 0, ans = Infinity, sum = 0, flag = false;
+
+    for(let fast = 0; fast < nums.length; fast++){
+        sum += nums[fast];
+
+        if(sum >= target) flag = true;
+
+        while(sum >= target){
+            sum -= nums[slow++];
+        }
+
+        if(flag) ans = Math.min(ans, fast - slow + 2);
+
+        flag = false;
+    }
+
+    return ans == Infinity ? 0 : ans;
+};
