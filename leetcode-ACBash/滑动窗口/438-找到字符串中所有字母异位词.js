@@ -1,3 +1,11 @@
+/***
+ * @creater:ACBash
+ * @create_time:22-3-30 15:48:6
+ * @last_modify:ACBash
+ * @modify_time:22-3-30 15:48:6
+ * @line_count:131
+ **/
+
 /* console.log(findAnagrams("cbacdcebabacd","abc")); */
 /* 1.自己写的滑动窗口，7000ms */
 function deepCopy(obj) {
@@ -87,3 +95,45 @@ const findAnagrams = (s,t) => {
 
     return res;
 }
+
+const findAnagrams = (s, t) => {
+    let slow = 0, ans = [];
+    let map = {}, cNum = 0;
+
+    for(const c of t){
+        if(!map[c]){
+            map[c] = 0;
+            cNum++;
+        }
+        map[c]++;
+    }
+
+    for(let i = 0; i < t.length; i++){
+        if(map[s[i]] != undefined){
+            map[s[i]]--;            
+            if(map[s[i]] == 0) cNum--;
+            if(cNum == 0) ans.push(0);
+        }
+    }
+    
+    for(let fast = t.length; fast < s.length; fast++, slow++){
+        if(s[fast] == s[slow]){
+            cNum == 0 && ans.push(slow + 1);
+            continue;
+        }
+
+        if(map[s[fast]] != undefined){
+            map[s[fast]]--;
+            map[s[fast]] == 0 && cNum--;
+        }
+
+        if(map[s[slow]] != undefined){
+            map[s[slow]]++;
+            map[s[slow]] == 1 && cNum++;
+        }
+
+        cNum == 0 && ans.push(slow + 1);
+    }
+
+    return ans;
+};
