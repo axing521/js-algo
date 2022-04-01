@@ -1,3 +1,11 @@
+/***
+ * @creater:ACBash
+ * @create_time:22-4-1 20:50:47
+ * @last_modify:ACBash
+ * @modify_time:22-4-1 20:50:47
+ * @line_count:147
+ **/
+
 /* 3600ms */
 const numSubarraysWithSum = (nums,goal) => {
     let preLeft = 0, right = 0, len = nums.length;
@@ -110,4 +118,38 @@ const numSubarraysWithSum = (nums,goal) => {
     return res;
 };
 
-console.log(numSubarraysWithSum([0,0,0,0,0,0,1,0,0,0],0));
+/* 前缀和，哈希表 */
+const numSubarraysWithSum = (nums, goal) => {
+    let ans = 0, sum = 0;
+    let pre = new Map();
+
+    for(const num of nums){
+        pre.set(sum, (pre.get(sum) || 0) + 1);
+        sum += num;
+        ans += pre.get(sum - goal) || 0;
+    }
+
+    return ans;
+};
+
+/* 滑动窗口，非常隐蔽，atmost */
+const numSubarraysWithSum = (nums, goal) => {
+    let ans = 0, sum1 = 0, slow1 = 0, sum2 = 0, slow2 = 0;
+
+    for(let fast = 0; fast < nums.length; fast++){
+        sum1 += nums[fast];
+        sum2 += nums[fast];
+
+        while(slow1 <= fast && sum1 > goal){
+            sum1 -= nums[slow1++];
+        }
+
+        while(slow2 <= fast && sum2 >= goal){
+            sum2 -= nums[slow2++];
+        }
+
+        ans += slow2 - slow1;
+    }
+
+    return ans;
+};
