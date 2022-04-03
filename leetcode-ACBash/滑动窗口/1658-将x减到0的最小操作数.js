@@ -1,3 +1,11 @@
+/***
+ * @creater:ACBash
+ * @create_time:22-4-3 17:34:44
+ * @last_modify:ACBash
+ * @modify_time:22-4-3 17:34:44
+ * @line_count:90
+ **/
+
 /* 失败作 */
 /* const minOperations = (nums,x) => {
     const len = nums.length;
@@ -59,4 +67,32 @@ const minOperations = (nums,x) => {
     }
 
     return ret===Infinity ? -1 : ret;
+};
+
+/* 题目中nums[i] >= 1，不会有0的情况，所以能成功,如果有0怎么办？？ */
+const minOperations = (nums, x) => {
+    let allSum = 0;
+    
+    for(const num of nums){
+        allSum += num;
+    }
+    
+    let target = allSum - x;
+
+    if(target == 0) return nums.length;
+
+    let ans = -1, slow = 0, sum = 0;
+
+    for(let fast = 0; fast < nums.length; fast++){
+        sum += nums[fast];
+        
+        while(slow <= fast && sum >= target){
+            if(sum == target) ans = Math.max(ans, fast - slow + 1);
+            sum -= nums[slow++];
+        }
+    }
+
+    if(ans == -1) return -1;
+
+    return nums.length - ans;
 };
