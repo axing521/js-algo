@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-10-10 17:39:14
  * @last_modify:ACBash
- * @modify_time:21-10-10 17:40:26
- * @line_count:191
+ * @modify_time:22-4-3 14:18:57
+ * @line_count:225
  **/
 
 /* console.log(subarraysWithKDistinct([2,1,1,1,2],1)); */
@@ -197,3 +197,37 @@ const subarraysWithKDistinct = (nums,k) => {
 };
 
 console.log(subarraysWithKDistinct([1,2,1,3,4],3)); 
+
+const subarraysWithKDistinct = (nums, k) => {
+    let ans = 0, slow1 = 0, map1 = {}, cNum1 = 0, slow2 = 0, map2 = {}, cNum2 = 0;
+
+    for(let fast = 0; fast < nums.length; fast++){
+        if(!map1[nums[fast]]){
+            map1[nums[fast]] = 0;
+            cNum1++;
+        }
+        map1[nums[fast]]++;
+
+        if(!map2[nums[fast]]){
+            map2[nums[fast]] = 0;
+            cNum2++;
+        }
+        map2[nums[fast]]++;
+
+        while(slow1 <= fast && cNum1 > k){
+            map1[nums[slow1]]--;
+            if(map1[nums[slow1]] == 0) cNum1--;
+            slow1++;
+        }
+
+        while(slow2 <= fast && cNum2 >= k){
+            map2[nums[slow2]]--;
+            if(map2[nums[slow2]] == 0) cNum2--;
+            slow2++;
+        }
+
+        ans += slow2 - slow1;
+    }
+
+    return ans;
+};
