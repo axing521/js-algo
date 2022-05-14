@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-11-23 10:56:48
  * @last_modify:ACBash
- * @modify_time:21-11-24 22:30:46
- * @line_count:129
+ * @modify_time:22-5-14 14:57:48
+ * @line_count:180
  **/
 
 //times数组记录图中的所有“边”信息 => [u, v, w];
@@ -83,50 +83,101 @@ const networkDelayTime = (times, n, k) => {
     return ans == Infinity ? -1 : ans;
 };
 
-/* 找最近节点的时候可以用最小堆，下次试试看 */
-const dijkstra = (graph, start, end) => {
-    const visited = new Set();
-    const minHeap = new MinPriorityQueue(); //LC内置API
+/* 找最近节点的时候可以用最小堆，已完成：22-5-14 */
+const swap = (arr, i, j) => [arr[i], arr[j]] = [arr[j], arr[i]];
+const defaultCmp = (a, b) => a > b;
 
-    minHeap.enqueue(start, 0);
+class Heap{
+    constructor(cmp = defaultCmp){
+        this.cmp = cmp;
+        this.container = [];
+    }
 
-    while(!minHeap.isEmpty()){
-        const {element, priority} = minHeap.dequeue();
-        const curPoint = element;
-        const curCost = priority;
+    insert(val){
+        const {cmp, container} = this;
 
-        if(visited.has(curPoint)) continue;
-        visited.add(curPoint);
-        if(curPoint == end) return curCost;
+        container.push(val);
 
-        if(!graph[curPoint]) continue;
-        for(const [nextPoint, nextCost] of graph[curPoint]){
-            if(visited.has(nextPoint)) continue;
+        let index = container.length - 1;
+        let parent = (index - 1) >> 1;
 
-            const accumulatedCost = nextCost + curCost;
-            minHeap.enqueue(nextPoint, accumulatedCost);
+        while(index){
+            if(cmp(container[parent][1], container[index][1])) break;
+
+            swap(container, index, parent);
+
+            index = parent;
+
+            parent = (index - 1) >> 1;
         }
     }
 
-    return -1;
-};
+    extract(){
+        if(this.container.length <= 1) return this.container.pop();
+
+        const {cmp, container} = this;
+
+        swap(container, 0, container.length - 1);
+
+        const ans = container.pop(), len = container.length;
+        let index = 0, betterChild = index * 2 + 1;
+
+        while(betterChild < len){
+            let right = index * 2 + 2;
+            
+            if(right < len && cmp(container[right][1], container[betterChild][1])) betterChild = right;
+
+            if(cmp(container[index][1], container[betterChild][1])) break;
+
+            swap(container, index, betterChild);
+
+            index = betterChild;
+
+            betterChild = index * 2 + 1;
+        }
+
+        return ans;
+    }
+
+    top(){
+        return this.container[0];
+    }
+
+    size(){
+        return this.container.length;
+    }
+}
 
 const networkDelayTime = (times, n, k) => {
-    let graph = {}, ans = -1;
+    let graph = Array.from({length: n}, () => []);
+    let minPaths = new Array(n).fill(Infinity);
+    let visited = new Array(n).fill(false);
+    minPaths[k - 1] = 0;
 
-    for(const [from, to, weight] of times){
-        if(!graph[from]) graph[from] = [];
-        graph[from].push([to, weight]);
+    for(const [u, v, w] of times){
+        graph[u - 1].push([v - 1, w]);
     }
 
-    for(let to = 1; to <= n; to++){
-        const dist = dijkstra(graph, k, to);
+    let minHeap = new Heap((a, b) => a < b);
+    minHeap.insert([k - 1, minPaths[k - 1]]);
 
-        if(dist == -1) return -1;
-        ans = Math.max(ans, dist);
+    while(minHeap.size()){
+        const top = minHeap.extract();
+
+        if(visited[top[0]]) continue;
+        visited[top[0]] = true;
+
+        const neighbors = graph[top[0]];
+
+        for(const [next, dist] of neighbors){
+            if(minPaths[next] > minPaths[top[0]] + dist){
+                minPaths[next] = minPaths[top[0]] + dist;
+                minHeap.insert([next, minPaths[next]]);
+            }
+        }
     }
 
-    return ans;
+    return Math.max(...minPaths) == Infinity ? -1 : Math.max(...minPaths)
 };
 /* 还有BFS的 */
 
