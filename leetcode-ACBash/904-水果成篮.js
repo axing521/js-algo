@@ -2,39 +2,43 @@
  * @creater:ACBash
  * @create_time:21-10-10 15:49:46
  * @last_modify:ACBash
- * @modify_time:22-3-30 17:35:47
- * @line_count:116
+ * @modify_time:22-10-17 21:17:3
+ * @line_count:96
  **/
 
 /* console.log(totalFruit([3,3,3,1,2,1,1,2,3,3,4])); */
 /* 自己写的，150ms */
 const totalFruit = (fruits) => {
-    let left = 0, fruitBox = new Map(), len = 0, fruitType = 0;
+    let ans = 0, left = 0, fruitBox = new Map(), fruitType = 0;
 
-    for(let right=0; right<fruits.length; right++){
-        let curFruit = fruits[right]; 
-        
-        if(!fruitBox[curFruit]){
-            fruitBox[curFruit] = 1;
+    for(let right = 0; right < fruits.length; right++){
+        let curFruit = fruits[right];
+
+        if(!fruitBox.get(curFruit)){
+            fruitBox.set(curFruit, 1);
             fruitType++;
         }else{
-            fruitBox[curFruit]++;
+            fruitBox.set(curFruit, fruitBox.get(curFruit) + 1);
         }
 
         while(fruitType > 2){
-            if(len===0 || len<right-left){
-                len = right - left;
+            if(ans == 0 || ans < right - left){
+                ans = right - left;
             }
+
             let leftFruit = fruits[left++];
-            if(--fruitBox[leftFruit] === 0) fruitType--;
+
+            fruitBox.set(leftFruit, fruitBox.get(leftFruit) - 1);
+
+            if(fruitBox.get(leftFruit) == 0) fruitType--;
         }
 
-        if(len===0 || len<right-left+1){
-            len = right - left + 1;
+        if(ans == 0 || ans < right - left + 1){
+            ans = right - left + 1;
         }
     }
 
-    return len;
+    return ans;
 };
 
 /* 借用前缀和思想，使用集合set，篮子装不下了全扔下，从当前的树往回捡 */
@@ -43,54 +47,30 @@ const totalFruit = (fruits) => {
  */
 /* 看了一圈LC题解，90%都是滑动窗口，其他是DP，我这个解法是不是有点一枝独秀 */
 const totalFruit = (fruits) => {
-    let ans = 0;
-    let pre = 0;
-    let boxs = new Set();
+    let ans = 0, pre = 0, box = new Set();
 
-    for(let i=0; i<fruits.length; i++){
-        boxs.add(fruits[i]);
-        if(boxs.size <= 2){
+    for(let i = 0; i < fruits.length; i++){
+        box.add(fruits[i]);
+
+        if(box.size <= 2){
             pre++;
-            
         }else{
-            boxs.clear();
+            box.clear();
+
             let j = i;
-            boxs.add(fruits[j]);
+            box.add(fruits[j]);
             pre = 1;
-            const fruit1 = fruits[j-1];
-            while(fruits[j-1] === fruit1){
-                boxs.add(fruits[j-1]);
+
+            const fruit1 = fruits[j - 1];   //前面一个肯定不相同
+
+            while(fruits[j - 1] == fruit1){
+                box.add(fruits[j - 1]);
                 pre++;
                 j--;
             }
         }
 
         ans = Math.max(ans, pre);
-    }
-
-    return ans;
-};
-
-const totalFruit = (fruits) => {
-    let slow = 0, ans = 0;
-    let map = {}, cNum = 0;
-
-    for(let fast = 0; fast < fruits.length; fast++){
-        if(!map[fruits[fast]]){
-            map[fruits[fast]] = 0;
-            cNum++;
-        }
-        map[fruits[fast]]++;
-
-        if(cNum <= 2) ans = Math.max(ans, fast - slow + 1);
-
-        while(cNum > 2){
-            map[fruits[slow]]--;
-
-            map[fruits[slow]] == 0 && cNum--;
-
-            slow++;
-        }
     }
 
     return ans;
