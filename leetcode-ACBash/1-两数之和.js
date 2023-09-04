@@ -2,11 +2,11 @@
  * @creater:ACBash
  * @create_time:22-3-6 16:47:34
  * @last_modify:ACBash
- * @modify_time:22-3-6 17:3:53
+ * @modify_time:22-11-18 11:44:34
  * @line_count:13
  **/
 
- const twoSum = (nums, target) => {
+const twoSum = (nums, target) => {
     let map = new Map(), ans = [];
 
     nums.forEach((num, index) => {

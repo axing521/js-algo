@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-10-18 15:3:2
  * @last_modify:ACBash
- * @modify_time:22-10-23 18:27:48
- * @line_count:45
+ * @modify_time:22-10-23 18:27:3
+ * @line_count:54
  **/
 
 /* 单调栈，600ms */
@@ -51,3 +51,12 @@ class StockSpanner{
         return this.count - flag;
     }
 }
+
+let a = new StockSpanner();
+console.log(a.next(100));
+console.log(a.next(80));
+console.log(a.next(60));
+console.log(a.next(70));
+console.log(a.next(60));
+console.log(a.next(75));
+console.log(a.next(85));

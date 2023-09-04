@@ -2,11 +2,11 @@
  * @creater:ACBash
  * @create_time:21-12-6 18:9:13
  * @last_modify:ACBash
- * @modify_time:21-12-6 19:1:16
+ * @modify_time:22-11-17 10:11:42
  * @line_count:50
  **/
 
- const mergeTwoLists = (list1, list2) => {
+const mergeTwoLists = (list1, list2) => {
     let node = new ListNode();
     const dummy = node;
 

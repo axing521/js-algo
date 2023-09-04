@@ -1,3 +1,11 @@
+/***
+ * @creater:ACBash
+ * @create_time:21-10-13 17:33:34
+ * @last_modify:ACBash
+ * @modify_time:21-10-13 17:41:49
+ * @line_count:56
+ **/
+
 /* 调测用例 */
 /* console.log(decodeString("3[a]")); */
 
@@ -9,7 +17,7 @@ const decodeString = (s) => {
     let str = "";
     for(let i=0; i<s.length; i++){
         if(!isNaN(s[i])){
-            num = num*10 + parseInt(s[i]); 
+            num = num*10 + Number(s[i]); 
         }else if(s[i]==="["){
             numStack.push(num);
             strStack.push(str);
@@ -44,12 +52,12 @@ const decodeString = (s) => {
                 numTemp = soloStack.pop();
             }
             soloStack.push(numTemp);
-            str = str.repeat(parseInt(num));
+            str = str.repeat(Number(num));
             soloStack.push(str);
             str = "";
             num = "";
         }
     }
-    /* console.log(soloStack.join("")); */
+    
     return soloStack.join("");
 };

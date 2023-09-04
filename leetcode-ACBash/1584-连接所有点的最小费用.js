@@ -2,11 +2,12 @@
  * @creater:ACBash
  * @create_time:21-11-30 12:11:40
  * @last_modify:ACBash
- * @modify_time:21-11-30 16:6:18
- * @line_count:96
+ * @modify_time:22-5-16 16:11:17
+ * @line_count:97
  **/
 
 /* Prim,题目可看出稠密图，性能很好 */
+//visited 能确定已选顶点和未选顶点；minPaths 表示该顶点与已选顶点集合的所有边集合的最小边权值；parent 表示这条边的前溯节点
 const minCostConnectPoints = (points) => {
     const n = points.length;
     let visited = new Array(n).fill(false);

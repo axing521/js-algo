@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-12-4 16:29:37
  * @last_modify:ACBash
- * @modify_time:21-12-4 17:27:23
- * @line_count:65
+ * @modify_time:22-5-20 13:53:32
+ * @line_count:128
  **/
 
 /* 和LC-886一样，染色法 + DFS搞定 */
@@ -66,6 +66,69 @@ const isBipartite = (graph) => {
         for(const next of graph[i]){
             if(uf.is_connected(i, next)) return false;
             uf.union(graph[i][0], next);
+        }
+    }
+
+    return true;
+};
+
+/* 1.DFS，染色法 */
+const isBipartite = (graph) => {
+    const n = graph.length;
+    let colors = new Array(n).fill(0);
+
+    const dfs = (i, color) => {
+        colors[i] = color;
+
+        for(const next of graph[i]){
+            if(colors[next] == color) return false;
+            if(colors[next] == 0 && !dfs(next, -1 * color)) return false;
+        }
+
+        return true;
+    }
+
+    for(let i = 0; i < n; i++){
+        if(colors[i] == 0 && !dfs(i, 1)) return false;
+    }
+
+    return true;
+};
+
+/* 2.并查集 */
+class DisjointSetUnion{
+    constructor(n){
+        this.n = n;
+        this.f = Array.from({length: n}, (val, index) => index);
+    }
+
+    find(x){
+        if(this.f[x] == x) return x;
+        
+        this.f[x] = this.find(this.f[x]);
+
+        return this.f[x];
+    }
+
+    union(x, y){
+        let fx = this.find(x), fy = this.find(y);
+
+        if(fx == fy) return false;
+
+        this.f[fy] = fx;
+        
+        return true;
+    }
+}
+
+const isBipartite = (graph) => {
+    const n = graph.length;
+    let dsu = new DisjointSetUnion(n);
+
+    for(let i = 0; i < n; i++){
+        for(const next of graph[i]){
+            if(dsu.find(i) == dsu.find(next)) return false;
+            dsu.union(graph[i][0], next);
         }
     }
 

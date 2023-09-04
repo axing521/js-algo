@@ -2,11 +2,10 @@
  * @creater:ACBash
  * @create_time:21-12-27 10:36:41
  * @last_modify:ACBash
- * @modify_time:21-12-27 13:33:49
- * @line_count:149
+ * @modify_time:21-12-27 13:32:3
+ * @line_count:148
  **/
 
-/* 本题和面试题17.14相同 */
  const defaultCmp = (a, b) => a > b;
  const swap = (arr, i, j) => [arr[i], arr[j]] = [arr[j], arr[i]];
  

@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:22-1-13 13:42:14
  * @last_modify:ACBash
- * @modify_time:22-1-13 21:59:5
- * @line_count:110
+ * @modify_time:22-1-24 18:47:5
+ * @line_count:149
  **/
 
 /* 树形DP，懵逼 */
@@ -115,4 +115,43 @@ var sumOfDistancesInTree = function (N, edges) {
     postOrder(0,-1)
     preOrder(0,-1)
     return distSum
+};
+
+/* 无注释 */
+const sumOfDistancesInTree = (n, edges) => {
+    let graph = Array.from({length: n}, () => []);
+
+    for(const [u, v] of edges){
+        graph[u].push(v);
+        graph[v].push(u);
+    }
+
+    let distSum = Array.from({length: n}, () => 0);
+    let nodeSum = Array.from({length: n}, () => 1);
+
+    const postorder = (node, parent) => {
+        const neighbors = graph[node];
+
+        for(const neighbor of neighbors){
+            if(neighbor == parent) continue;
+            postorder(neighbor, node);
+            nodeSum[node] += nodeSum[neighbor];
+            distSum[node] += distSum[neighbor] + nodeSum[neighbor];
+        }
+    };
+
+    const preorder = (node, parent) => {
+        const neighbors = graph[node];
+        
+        for(const neighbor of neighbors){
+            if(neighbor == parent) continue;
+            distSum[neighbor] = distSum[node] - nodeSum[neighbor] + n - nodeSum[neighbor];
+            preorder(neighbor, node);
+        }
+    };
+
+    postorder(0, -1);
+    preorder(0, -1);
+
+    return distSum;
 };

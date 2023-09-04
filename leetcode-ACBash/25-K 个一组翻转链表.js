@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:22-11-6 18:24:46
  * @last_modify:ACBash
- * @modify_time:22-11-6 18:24:53
- * @line_count:40
+ * @modify_time:22-11-15 15:9:42
+ * @line_count:37
  **/
 
 //head-tail的翻转
@@ -12,7 +12,7 @@ const reverseK = (head, tail) => {
     let node = head;
 
     while(prev != tail){
-        const next = node.next;
+        let next = node.next;
         node.next = prev;
         prev = node;
         node = next;
@@ -25,23 +25,20 @@ const reverseK = (head, tail) => {
 const reverseKGroup = (head, k) => {
     let hair = new ListNode(-1);
     hair.next = head;
-
-    let pre = hair, next;
-
+    let pre = hair, tail = hair;
+    
     while(head){
-        let tail = pre;
-
         for(let i = 0; i < k; i++){
             tail = tail.next;
             if(tail == null) return hair.next;
         }
 
-        let [newHead, newTail] = reverseK(head, tail);
+        const [newHead, newTail] = reverseK(head, tail);
 
         pre.next = newHead;
-        
         pre = newTail;
         head = pre.next;
+        tail = newTail;
     }
 
     return hair.next;

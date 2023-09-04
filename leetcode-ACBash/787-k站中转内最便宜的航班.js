@@ -2,27 +2,26 @@
  * @creater:ACBash
  * @create_time:21-11-28 21:9:21
  * @last_modify:ACBash
- * @modify_time:21-11-28 22:9:31
- * @line_count:42
+ * @modify_time:22-5-15 14:15:23
+ * @line_count:41
  **/
 
 /* DP,确实牛逼,二维数组 */
 const findCheapestPrice = (n, flights, src, dst, k) => {
-    const f = Array.from(new Array(k + 2), () => new Array(n).fill(Infinity));
+    let dp = Array.from({length: k + 2}, () => new Array(n).fill(Infinity));
 
-    f[0][src] = 0;
+    dp[0][src] = 0;
 
     for(let t = 1; t <= k + 1; t++){
-        for(const flight of flights){
-            const j = flight[0], i = flight[1], cost = flight[2];
-            f[t][i] = Math.min(f[t][i], f[t - 1][j] + cost);
+        for(const [u, v, w] of flights){
+            dp[t][v] = Math.min(dp[t][v], dp[t - 1][u] + w);
         }
     }
 
     let ans = Infinity;
 
     for(let t = 1; t <= k + 1; t++){
-        ans = Math.min(ans, f[t][dst]);
+        ans = Math.min(ans, dp[t][dst]);
     }
 
     return ans == Infinity ? -1 : ans;

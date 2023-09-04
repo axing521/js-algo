@@ -2,11 +2,11 @@
  * @creater:ACBash
  * @create_time:22-1-7 11:53:17
  * @last_modify:ACBash
- * @modify_time:22-1-11 21:9:50
- * @line_count:18
+ * @modify_time:22-10-5 0:35:16
+ * @line_count:32
  **/
 
- const hanota = (A, B, C) => {
+const hanota = (A, B, C) => {
     const len = A.length;
 
     const move = (len, A, B, C) => {
@@ -23,4 +23,18 @@
     };
 
     move(len, A, B, C);
+};
+
+const hanota = (A, B, C) => {
+    const n = A.length;
+
+    const recursive = (n, source, temp, destination) => {
+        if(n == 1) return destination.push(source.pop());
+
+        recursive(n - 1, source, destination, temp);
+        destination.push(source.pop());
+        recursive(n - 1, temp, source, destination);
+    };
+
+    return recursive(n, A, B, C);
 };

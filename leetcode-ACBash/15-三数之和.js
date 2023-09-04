@@ -2,10 +2,11 @@
  * @creater:ACBash
  * @create_time:22-5-24 12:50:49
  * @last_modify:ACBash
- * @modify_time:22-5-24 16:30:11
- * @line_count:59
+ * @modify_time:22-11-12 12:27:24
+ * @line_count:61
  **/
 
+//排序，从最大的z开始，用一个set去重，map记录需要的y = z - x；
 /* 模仿 两数之和 & 有效三角形，1100ms*/
 const threeSum = (nums) => {
     const len = nums.length;
@@ -31,6 +32,7 @@ const threeSum = (nums) => {
     return sumFor0;
 };
 
+//排序，从最大的z开始，首先排除重复的z，再双指针找合适且不重复的left，right
 /* 有效三角形的 双指针,120ms */
 const threeSum = (nums) => {
     const len = nums.length;
@@ -50,7 +52,7 @@ const threeSum = (nums) => {
                 ans.push([nums[left], nums[right], nums[k]]);
                 
                 while(left < right && nums[left] == nums[left + 1]) left++;
-                while(left < right && nums[right] == nums[right - 1]) right++;
+                while(left < right && nums[right] == nums[right - 1]) right--;
 
                 left++;
                 right--;

@@ -2,13 +2,13 @@
  * @creater:ACBash
  * @create_time:21-11-19 18:59:4
  * @last_modify:ACBash
- * @modify_time:21-11-19 20:51:50
+ * @modify_time:21-11-19 20:49:57
  * @line_count:18
  **/
 
  const distributeCoins = (root) => {
     let ans = 0;
-    
+
     const dfs = (node) => {
         if(!node) return 0;
 

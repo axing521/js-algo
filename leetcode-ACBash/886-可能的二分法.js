@@ -2,7 +2,7 @@
  * @creater:ACBash
  * @create_time:21-12-1 11:7:39
  * @last_modify:ACBash
- * @modify_time:22-10-16 19:35:51
+ * @modify_time:22-5-20 13:34:10
  * @line_count:103
  **/
 
@@ -66,7 +66,7 @@ const possibleBipartition = (n, dislikes) => {
 };
 
 /* 看到有用并查集的，下次看看 */
-class disjointSetUnion{
+class DisjointSetUnion{
     constructor(n){
         this.n = n;
         this.f = Array.from({length: n}, (val, index) => index);
@@ -76,7 +76,7 @@ class disjointSetUnion{
         if(this.f[x] == x) return x;
         
         this.f[x] = this.find(this.f[x]);
-        
+
         return this.f[x];
     }
 
@@ -89,11 +89,11 @@ class disjointSetUnion{
 
         return true;
     }
-};
+}
 
 const possibleBipartition = (n, dislikes) => {
     let graph = Array.from({length: n}, () => []);
-    let dsu = new disjointSetUnion(n);
+    let dsu = new DisjointSetUnion(n);
 
     for(const [u, v] of dislikes){
         graph[u - 1].push(v - 1);

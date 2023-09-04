@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-11-10 12:58:45
  * @last_modify:ACBash
- * @modify_time:21-11-16 16:38:41
- * @line_count:93
+ * @modify_time:22-5-25 15:46:59
+ * @line_count:129
  **/
 
 /* LC,DFS,字典树,用数组实现 */
@@ -91,6 +91,42 @@ class WordDictionary{
 
             }
             if(!node[c]) return false;
+            node = node[c];
+        }
+
+        return node["isEnd"];
+    }
+}
+
+class WordDictionary{
+    constructor(){
+        this.children = {};
+    }
+
+    addWord(word){
+        let node = this.children;
+
+        for(const c of word){
+            if(!node[c]) node[c] = {"isEnd": false};
+            node = node[c];
+        }
+
+        node["isEnd"] = true;
+    }
+
+    search(word, start = 0, node = this.children){
+        for(let i = start; i < word.length; i++){
+            const c = word[i];
+
+            if(c == "."){
+                for(const son in node){
+                    if(son != "isEnd" && this.search(word, i + 1, node[son])) return true;
+                }
+                return false;
+            }
+
+            if(!node[c]) return false;
+
             node = node[c];
         }
 

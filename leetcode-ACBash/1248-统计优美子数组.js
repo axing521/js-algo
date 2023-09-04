@@ -1,8 +1,8 @@
 /***
  * @creater:ACBash
- * @create_time:22-4-3 16:44:33
+ * @create_time:22-4-3 16:44:12
  * @last_modify:ACBash
- * @modify_time:22-4-3 16:44:33
+ * @modify_time:22-4-3 16:44:12
  * @line_count:55
  **/
 
@@ -37,8 +37,6 @@ const numberOfSubarrays = (nums,k) => {
     return ret;
 };
 
-console.log(numberOfSubarrays([2,4,6],1));
-
 const numberOfSubarrays = (nums, k) => {
     let ans = 0, slow1 = 0, oddNum1 = 0, slow2 = 0, oddNum2 = 0;
 
@@ -61,3 +59,5 @@ const numberOfSubarrays = (nums, k) => {
 
     return ans;
 };
+
+console.log(numberOfSubarrays([2,4,6],1));

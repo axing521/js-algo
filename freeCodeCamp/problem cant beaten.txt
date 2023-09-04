@@ -1,0 +1,5 @@
+编写高阶箭头函数
+https://learn.freecodecamp.one/javascript-algorithms-and-data-structures/es6/write-higher-order-arrow-functions
+
+算法基础-返回数组中最大的数字：第二种解法
+

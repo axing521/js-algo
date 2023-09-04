@@ -2,7 +2,7 @@
  * @creater:ACBash
  * @create_time:21-10-12 16:35:24
  * @last_modify:ACBash
- * @modify_time:21-10-12 17:19:43
+ * @modify_time:21-10-12 17:26:39
  * @line_count:19
  **/
 
@@ -24,4 +24,4 @@ const xorQueries = (arr,queries) => {
 
 console.log(xorQueries([1,3,4,8], [[0,1],[1,2],[0,3],[3,3]]));
 
-/* console.log(14^2); */
+/* console.log(undefined^1); */

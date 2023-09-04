@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-12-8 13:52:34
  * @last_modify:ACBash
- * @modify_time:22-3-28 16:47:45
- * @line_count:47
+ * @modify_time:22-11-23 17:47:42
+ * @line_count:64
  **/
 
 /* 集合的办法，多用空间 */
@@ -53,3 +53,20 @@ const hasCycle = (head) => {
         if(fast == slow) return true;
     }
 };
+
+const hasCycle = (head) => {
+    if(!head) return false;
+
+    let fast = head, slow = head;
+
+    while(fast.next && fast.next.next){
+        fast = fast.next.next;
+        slow = slow.next;
+
+        if(fast == slow){
+            return true;
+        }
+    }
+
+    return false;
+}

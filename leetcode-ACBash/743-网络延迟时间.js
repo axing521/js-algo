@@ -2,8 +2,8 @@
  * @creater:ACBash
  * @create_time:21-11-23 10:56:48
  * @last_modify:ACBash
- * @modify_time:22-5-14 14:57:48
- * @line_count:180
+ * @modify_time:22-5-19 18:6:23
+ * @line_count:222
  **/
 
 //times数组记录图中的所有“边”信息 => [u, v, w];
@@ -179,6 +179,48 @@ const networkDelayTime = (times, n, k) => {
 
     return Math.max(...minPaths) == Infinity ? -1 : Math.max(...minPaths)
 };
+
+/* 不用堆，枚举 */
+const networkDelayTime = (times, n, k) => {
+    let graph = Array.from({length: n}, () => []);
+    let minPaths = new Array(n).fill(Infinity);
+    let visited = new Array(n).fill(false);
+    minPaths[k - 1] = 0;
+
+    for(const [u, v, w] of times){
+        graph[u - 1].push([v - 1, w]);
+    }
+
+    const bestV = (visited, minPaths) => {
+        let min = Infinity, minIndex = k - 1;
+        
+        for(let v = 0; v < n; v++){
+            if(!visited[v] && minPaths[v] < min){
+                min = minPaths[v];
+                minIndex = v;
+            }
+        }
+
+        return minIndex;
+    }
+
+    for(let i = 0; i < n; i++){
+        const u = bestV(visited, minPaths);
+
+        visited[u] = true;
+
+        const neighbors = graph[u];
+
+        for(const [next, dist] of neighbors){
+            if(!visited[next] && minPaths[next] > minPaths[u] + dist){
+                minPaths[next] = minPaths[u] + dist;
+            }
+        }
+    }
+
+    return Math.max(...minPaths) == Infinity ? -1 : Math.max(...minPaths)
+};
+
 /* 还有BFS的 */
 
 /* floyd */
