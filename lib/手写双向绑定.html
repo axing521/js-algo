@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <input type="text" id="input1" name="">
+        <div id="inputText"></div>
+    </div>
+</body>
+
+<script>
+    let input = document.getElementById("input1");
+    let text = document.getElementById("inputText");
+    let data = {
+        value: ""
+    };
+
+    Object.defineProperty(data, "value", {
+        set: function (val) {
+            text.innerHTML = val;
+            input.value = val;
+        },
+        get: function () {
+            return input.value;
+        }
+    })
+
+    input.onkeyup = function (e) {
+        data.value = e.target.value;
+    }
+
+    data.value = "12343";
+
+</script>
+
+</html>
