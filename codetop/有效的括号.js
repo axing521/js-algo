@@ -3,7 +3,7 @@
 
 const func1 = s => {
     while (s.includes('()') || s.includes('[]') || s.includes('{}')) {
-        s.replace('()', '').replace('[]', '').replace('{}', '');
+        s = s.replace('()', '').replace('[]', '').replace('{}', '');
     }
 
     return s.length === 0;

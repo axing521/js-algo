@@ -1,6 +1,6 @@
 // 给定一个二叉树，找到树中指定两个节点的最近公共祖先
-// dfs递归，自顶向下，left，right表示p，q是否在子树中，并返回p||q||null
 
+// dfs递归，自顶向下，left，right表示p，q是否在子树中，并返回p||q||null
 const func1 = (root, p, q) => {
     if(!root || root == p || root == q) return root;
 

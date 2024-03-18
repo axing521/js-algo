@@ -1,6 +1,6 @@
 // 给定一个由'1'和'0'组成的二维网格，计算网格中岛屿的数量
-// 二维数组DFS，如果有1，那么dfs并且ans++，dfs中将1反转为0
 
+// 二维数组DFS，如果有1，那么dfs并且ans++，dfs中将1反转为0
 const dfs = (i, j, m, n, grid) => {
     if(i < 0 || j < 0 || i >= m || j >= n) return;
     if(grid[i][j] == "0") return;

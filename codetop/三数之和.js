@@ -33,4 +33,4 @@ const func1 = (nums) => {
     }
 
     return ans;
-};
+};        
